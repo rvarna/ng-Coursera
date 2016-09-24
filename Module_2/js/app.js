@@ -1,65 +1,61 @@
-(function(){
+(function () {
+    'use strict';
     var app = angular.module('ShoppingListCheckOff', []);
-    var toBuyShoppingController = function(ShoppingListCheckOffService)
-    {
-        this.areAllItemsBought = false;
+    var toBuyShoppingController = function (ShoppingListCheckOffService) {
         this.items = ShoppingListCheckOffService.getItemsToBuy();
-        this.buyItem = function(index)
-        {
+        this.buyItem = function (index) {
             ShoppingListCheckOffService.buyItem(index);
-            this.areAllItemsBought = this.items.length === 0;
-        }        
+        };
+
+        this.areAllItemsBought = function () {
+            return this.items.length === 0;
+        };
     };
 
-    var alreadyBoughtShoppingController = function(ShoppingListCheckOffService){
+    var alreadyBoughtShoppingController = function (ShoppingListCheckOffService) {
         this.items = ShoppingListCheckOffService.getItemsBought();
-        this.noItemsBoughtYet = ShoppingListCheckOffService.noItemsBoughtYet;
-    }; 
-    
-    var ShoppingListCheckOffService = function()
-    {
+        this.noItemsBought = function () {
+            return this.items.length === 0;
+        };
+    };
+
+    var ShoppingListCheckOffService = function () {
+        var itemsBought = [];
         var itemsToBuy = [
             {
-                name : "Cookies",
+                name: "Cookies",
                 quantity: 10
             },
             {
-                name : "Oranges",
+                name: "Oranges",
                 quantity: 10
             },
             {
-                name : "Books",
+                name: "Books",
                 quantity: 5
             },
             {
-                name : "Soda",
+                name: "Soda",
                 quantity: 4
             },
             {
-                name : "Plates",
+                name: "Plates",
                 quantity: 5
-            },
+            }
         ];
 
-        var itemsBought = [];
-
-        this.noItemsBoughtYet = true;
-        this.getItemsToBuy = function()
-        {
+        this.getItemsToBuy = function () {
             return itemsToBuy;
-        }
+        };
 
-        this.getItemsBought = function()
-        {
+        this.getItemsBought = function () {
             return itemsBought;
-        }
-        
-        this.buyItem = function(index)
-        {
+        };
+
+        this.buyItem = function (index) {
             itemsBought.push(itemsToBuy[index]);
             itemsToBuy.splice(index, 1);
-            this.noItemsBoughtYet = false;
-        }        
+        };
     };
 
     toBuyShoppingController.$inject = ['ShoppingListCheckOffService'];
@@ -68,5 +64,4 @@
     app.controller("ToBuyShoppingController", toBuyShoppingController);
     app.controller("AlreadyBoughtShoppingController", alreadyBoughtShoppingController);
     app.service("ShoppingListCheckOffService", ShoppingListCheckOffService);
-
 })();
