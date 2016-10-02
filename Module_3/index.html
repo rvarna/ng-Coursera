@@ -18,9 +18,10 @@
     <div class="form-group narrow-button">
       <button class="btn btn-primary" ng-click="ctrl.getFoundItems(ctrl.searchTerm)">Narrow It Down For Me!</button>
     </div>
-    <h1 ng-if="ctrl.nothingFoundMessage">{{ctrl.nothingFoundMessage}}</h1>
+    <div class="clearboth" > <span>{{ctrl.nothingFoundMessage}}<//span>
 
     <found-items items="ctrl.foundItems" on-remove="ctrl.removeItem(index)"></found-items>
+  </div>
   </div>
 
 </body>
