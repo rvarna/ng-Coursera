@@ -28,6 +28,10 @@ input[type="text"] {
 {
   clear: both;
 }
+.bold
+{
+  font-weight: bold
+}
 .loader,
 .loader:after {
   border-radius: 50%;
