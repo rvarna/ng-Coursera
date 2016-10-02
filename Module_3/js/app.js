@@ -9,6 +9,7 @@
         controller.nothingFoundMessage = "";
         controller.getFoundItems = function(searchTerm)
         {
+            controller.foundItems = [];
             if (searchTerm == undefined || searchTerm.trim() === '')
             {
                 controller.nothingFoundMessage = "Nothing found";
